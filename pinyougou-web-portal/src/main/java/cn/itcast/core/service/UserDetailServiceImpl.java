@@ -19,6 +19,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //获取用户名 此用户已经登陆成功   中央认证系统那边 Session也没有失效 给此用户授权
+
         //根据用户名去查询
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
