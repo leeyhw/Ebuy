@@ -47,4 +47,15 @@ public class ItemCatServiceImpl implements ItemCatService {
     public List<ItemCat> findAll() {
         return itemCatDao.selectByExample(null);
     }
+
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+        ItemCat itemCat=new ItemCat();
+        itemCat.setStatus(status);
+        for (Long id : ids) {
+            itemCat.setId(id);
+            itemCatDao.updateByPrimaryKeySelective(itemCat);
+        }
+    }
+
 }

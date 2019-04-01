@@ -52,4 +52,16 @@ public class TypeTemplateController {
     public TypeTemplate findOne(Long id){
         return typeTemplateService.findOne(id);
     }
+
+    //开始审核  （审核通过 驳回）
+    @RequestMapping("/updateStatus")
+    public Result updateStatus(Long[] ids ,String status){
+        try {
+            typeTemplateService.updateStatus(ids,status);
+            return new Result(true,"成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,"失败");
+        }
+    }
 }
