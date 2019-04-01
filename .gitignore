@@ -17,6 +17,6 @@ generatorConfig.xml
 *.cache
 *.lock
 Test*.java
-/pinyougou-web-user/src/main/resources/config/application.properties
-/pinyougou-web-user/src/main/resources/spring/spring-security.xml
 /pinyougou-dao/src/main/resources/properties/db.properties
+/pinyougou-web-user/src/main/resources/spring/spring-security.xml
+/pinyougou-web-user/src/main/resources/config/application.properties
