@@ -97,6 +97,7 @@
       ${fields}
     </if>
   </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.itcast.core.pojo.order.OrderQuery" >
     select
     <if test="distinct" >
@@ -109,6 +110,9 @@
     </if>
     <if test="orderByClause != null" >
       order by ${orderByClause}
+    </if>
+    <if test="offset != null and limit != null">
+      limit ${offset},${limit}
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -304,8 +308,9 @@
       </if>
     </trim>
   </insert>
+  <!-- 进行sql优化 -->
   <select id="countByExample" parameterType="cn.itcast.core.pojo.order.OrderQuery" resultType="java.lang.Integer" >
-    select count(*) from tb_order
+    select count(1) from tb_order
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

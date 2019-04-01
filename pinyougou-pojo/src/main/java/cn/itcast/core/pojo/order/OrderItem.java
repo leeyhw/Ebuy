@@ -2,6 +2,8 @@ package cn.itcast.core.pojo.order;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class OrderItem implements Serializable {
@@ -48,6 +50,17 @@ public class OrderItem implements Serializable {
     private String picPath;
 
     private String sellerId;
+
+    //规格
+    private String spec;
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
 
     private static final long serialVersionUID = 1L;
 
