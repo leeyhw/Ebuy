@@ -2,6 +2,10 @@ package cn.itcast.core.pojo.order;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 
 public class OrderItem implements Serializable {
     private Long id;
@@ -47,6 +51,17 @@ public class OrderItem implements Serializable {
     private String picPath;
 
     private String sellerId;
+
+    //规格
+    private String spec;
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -164,15 +179,15 @@ public class OrderItem implements Serializable {
         }
         OrderItem other = (OrderItem) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getItemId() == null ? other.getItemId() == null : this.getItemId().equals(other.getItemId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
-            && (this.getNum() == null ? other.getNum() == null : this.getNum().equals(other.getNum()))
-            && (this.getTotalFee() == null ? other.getTotalFee() == null : this.getTotalFee().equals(other.getTotalFee()))
-            && (this.getPicPath() == null ? other.getPicPath() == null : this.getPicPath().equals(other.getPicPath()))
-            && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()));
+                && (this.getItemId() == null ? other.getItemId() == null : this.getItemId().equals(other.getItemId()))
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+                && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
+                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+                && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
+                && (this.getNum() == null ? other.getNum() == null : this.getNum().equals(other.getNum()))
+                && (this.getTotalFee() == null ? other.getTotalFee() == null : this.getTotalFee().equals(other.getTotalFee()))
+                && (this.getPicPath() == null ? other.getPicPath() == null : this.getPicPath().equals(other.getPicPath()))
+                && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()));
     }
 
     @Override
