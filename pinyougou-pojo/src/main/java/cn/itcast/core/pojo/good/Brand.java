@@ -15,6 +15,20 @@ public class Brand implements Serializable {
      */
     private String firstChar;
 
+    private String aduit_status;
+
+    public String getAduit_status() {
+        return aduit_status;
+    }
+
+    public void setAduit_status(String aduit_status) {
+        this.aduit_status = aduit_status;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -41,19 +55,7 @@ public class Brand implements Serializable {
         this.firstChar = firstChar == null ? null : firstChar.trim();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", firstChar=").append(firstChar);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
+
 
     @Override
     public boolean equals(Object that) {

@@ -103,7 +103,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.itcast.core.pojo.good.Brand" >
-    insert into tb_brand (id, name, first_char
+    insert into tb_brand (id, name, first_char,audit_status
       )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{firstChar,jdbcType=VARCHAR}
       )
@@ -173,6 +173,9 @@
       </if>
       <if test="firstChar != null" >
         first_char = #{firstChar,jdbcType=VARCHAR},
+      </if>
+      <if test="audit_status != null" >
+        audit_status = #{audit_status,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

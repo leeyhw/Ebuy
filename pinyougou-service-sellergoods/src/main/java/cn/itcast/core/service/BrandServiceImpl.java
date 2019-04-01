@@ -51,6 +51,7 @@ public class BrandServiceImpl implements BrandService {
         //insert into tb_tt (id,name,98个) values (3,haha,null 98个)  执行的效果是一样的 但是执行的效率是一样的
         //insert into tb_tt (id,name) values (3,haha)
         //update tb_tt set id = #{id},name= ......   where id
+
     }
 
     @Override
