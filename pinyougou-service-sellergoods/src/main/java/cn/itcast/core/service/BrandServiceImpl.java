@@ -102,6 +102,10 @@ public class BrandServiceImpl implements BrandService {
         if(null != brand.getFirstChar() && !"".equals(brand.getFirstChar().trim())){
             criteria.andFirstCharEqualTo(brand.getFirstChar().trim());
         }
+        //只显示未审核状态的
+        if(null != brand.getStatus() && !"".equals(brand.getStatus().trim())){
+            criteria.andStatusEqualTo(brand.getStatus());
+        }
 
         //查询结果集
         Page<Brand> page = (Page<Brand>) brandDao.selectByExample(brandQuery);
@@ -114,6 +118,22 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<Map> selectOptionList() {
         return brandDao.selectOptionList();
+    }
+
+    //审核
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+
+        Brand brand=new Brand();
+        brand.setStatus(status);
+        if(null!=ids && ids.length>0){
+
+            for (Long id : ids) {
+                brand.setId(id);
+                brandDao.updateByPrimaryKeySelective(brand);
+            }
+        }
+
     }
 
 }

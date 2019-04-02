@@ -252,8 +252,7 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 		}
 		
 		return newList;
-	}
-	
+
 	// 显示状态
 	$scope.status = ["未审核","审核通过","审核未通过","关闭"];
 	

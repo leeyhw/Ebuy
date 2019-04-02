@@ -14,6 +14,28 @@ public class OrderQuery {
 
     protected String fields;
 
+
+    //加入 offset 起始位置  和 limit 查询页数  用来分页
+    protected int offset;
+
+    protected int limit;
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
     public OrderQuery() {
         oredCriteria = new ArrayList<Criteria>();
     }

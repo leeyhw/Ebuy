@@ -40,8 +40,10 @@ public class SpecificationServiceImpl implements SpecificationService {
     //添加
     @Override
     public void add(SpecificationVo vo) {
+        Specification specification = vo.getSpecification();
+        specification.setStatus("0");
         //规格表 并返回ID
-        specificationDao.insertSelective(vo.getSpecification());
+        specificationDao.insertSelective(specification);
 
  
         //规格选项表
@@ -91,6 +93,19 @@ public class SpecificationServiceImpl implements SpecificationService {
 
     @Override
     public List<Map> selectOptionList() {
+
         return specificationDao.selectOptionList();
+    }
+
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+        Specification specification=new Specification();
+        specification.setStatus(status);
+
+        for (Long id : ids) {
+
+            specification.setId(id);
+            specificationDao.updateByPrimaryKeySelective(specification);
+        }
     }
 }

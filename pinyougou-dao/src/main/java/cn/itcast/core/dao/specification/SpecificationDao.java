@@ -30,6 +30,5 @@ public interface SpecificationDao {
 
     int updateByPrimaryKey(Specification record);
 
-    //查询所有
     List<Map> selectOptionList();
 }

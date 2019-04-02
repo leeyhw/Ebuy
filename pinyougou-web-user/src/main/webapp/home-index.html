@@ -13,12 +13,12 @@
     
     <script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
 	<script type="text/javascript" src="js/base.js"></script>
-	<script type="text/javascript" src="js/service/loginService.js"></script>
 	<script type="text/javascript" src="js/controller/indexController.js"></script>
-    
+	<script type="text/javascript" src="js/service/loginService.js"></script>
+	<script type="text/javascript" src="js/service/orderService.js"></script>
 </head>
 
-<body  ng-app="pinyougou" ng-controller="indexController" ng-init="showName()">
+<body  ng-app="pinyougou" ng-controller="indexController" ng-init="showName();findOrder()">
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
@@ -197,7 +197,7 @@ $(function(){
                                 <tr>
                                     <thead>
                                         <th width="35%">宝贝</th>
-                                        <th width="5%">单价</th>
+                                        <th width="7%">单价</th>
                                         <th width="5%">数量</th>
                                         <th width="8%">商品操作</th>
                                         <th width="10%">实付款</th>
@@ -208,7 +208,7 @@ $(function(){
                             </table>
                         </div>
                         <div class="order-detail">
-                            <div class="orders">
+                            <!--<div class="orders">
                                 <div class="choose-order">
                                     <div class="sui-pagination pagination-large top-pages">
                                         <ul>
@@ -217,59 +217,137 @@ $(function(){
                                             <li class="next"><a href="#">下一页</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div>-->
 
-								<!--order1-->
+							<!--遍历订单集合-->
+							<div ng-repeat="order in resultMap.orderList">
                                 <div class="choose-title">
-                                    <label data-toggle="checkbox" class="checkbox-pretty ">
-                                           <input type="checkbox" checked="checked"><span>2017-02-11 11:59　订单编号：7867473872181848  店铺：哇哈哈 <a>和我联系</a></span>
+                                    <label data-toggle="checkbox" class="checkbox-pretty">
+                                           <input type="checkbox" checked="checked"><span>{{order.createTime}}　订单编号：{{order.orderId}}  店铺：{{order.sellerName}}</span>
                                      </label>
 									  <a class="sui-btn btn-info share-btn">分享</a>
                                 </div>
+
+								<div ng-repeat="item in order.orderItemList">
                                 <table class="sui-table table-bordered order-datatable">
                                     <tbody>
                                         <tr>
-                                            <td width="35%">
-                                                <div class="typographic"><img src="img/goods.png" />
-                                                    <a href="#" class="block-text">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
-                                                    <span class="guige">规格：温泉喷雾150ml</span>
+											<!--遍历订单明细集合-->
+											<!--<div ng-repeat="item in order">-->
+											<td width="35%">
+                                                <div class="typographic"><img style="width:100px;height:100px" src="{{item.picPath}}" />
+                                                    <a href="#" class="block-text">{{item.title}}</a><br/>
+                                                    <span class="guige">规格：{{item.spec}}</span>
+
                                                 </div>
                                             </td>
-                                            <td width="5%" class="center">
+
+                                            <td width="7%" class="center">
                                                 <ul class="unstyled">
-                                                    <li class="o-price">¥599.00</li>
-                                                    <li>¥299.00</li>
+                                                    <li class="o-price">¥{{item.price+222}}</li>
+                                                    <li>¥{{item.price}}</li>
                                                 </ul>
                                             </td>
-                                            <td width="5%" class="center">1</td>
+                                            <td width="5%" class="center">{{item.num}}</td>
+
+											<!--商品操作-->
                                             <td width="8%" class="center">
-                                               
+												<!--状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭,7、待评价-->
+												<ul class="unstyled" ng-if="order.status==1">
+												</ul>
+												<ul class="unstyled" ng-if="order.status==2">
+													<li><a>退货/退款</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==3">
+													<li>未发货</li>
+													<li><a>退货/退款</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==4">
+													<li>已发货</li>
+													<li><a>退货/退款</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==5">
+												</ul>
+												<ul class="unstyled" ng-if="order.status==6">
+												</ul>
+												<ul class="unstyled" ng-if="order.status==7">
+													<li><a>立即评价</a></li>
+												</ul>
                                             </td>
+
+
                                             <td width="10%" class="center" >
                                                 <ul class="unstyled">
-                                                    <li>¥299.00</li>
+                                                    <li>¥{{item.totalFee}}</li>
                                                     <li>（含运费：￥0.00）</li>
                                                 </ul>
                                             </td>
-                                            <td width="10%" class="center">
-                                                <ul class="unstyled">
-                                                    <li>等待卖家付款</li>
-                                                    <li><a href="orderDetail.html" class="btn">订单详情 </a></li>
+
+											<!--交易状态-->
+											<!--状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭,7、待评价-->
+											<td width="10%" class="center" >
+                                                <ul class="unstyled" ng-if="order.status==1">
+                                                    <li>等待买家付款</li>
+                                                    <li><a href="home-orderDetail.html" class="btn">订单详情 </a></li>
                                                 </ul>
+												<ul class="unstyled" ng-if="order.status==2">
+													<li>买家已付款</li>
+													<li><a href="home-orderDetail.html" class="btn">订单详情 </a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==3">
+													<li>等待发货</li>
+													<li><a href="home-orderDetail.html" class="btn">订单详情</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==4">
+													<li>已发货</li>
+													<li><a href="home-orderDetail.html" class="btn">订单详情</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==5">
+													<li>交易成功</li>
+													<li><a href="home-orderDetail.html" class="btn">订单详情</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==6">
+													<li>交易关闭</li>
+													<li><a href="home-orderDetail.html" class="btn">订单详情</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==7">
+													<li>待评价</li>
+													<li><a href="home-orderDetail.html" class="btn">订单详情</a></li>
+												</ul>
                                             </td>
-                                            <td width="10%" class="center">
-                                                <ul class="unstyled">
+
+											<!--交易操作-->
+											<!--状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭,7、待评价-->
+											<td width="10%" class="center" >
+                                                <ul class="unstyled" ng-if="order.status==1">
 													<li><a href="#" class="sui-btn btn-info">立即付款</a></li>
                                                     <li>取消订单</li>
-                                                    
                                                 </ul>
+												<ul class="unstyled" ng-if="order.status==2">
+													<li><a href="#" class="sui-btn btn-info">提醒发货</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==3">
+													<li><a href="#" class="sui-btn btn-info">提醒发货</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==4">
+													<li><a href="#" class="sui-btn btn-info">确认收货</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==5">
+													<li>交易已完成</li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==6">
+													<li><a href="#" class="sui-btn btn-info">重拍此单</a></li>
+												</ul>
+												<ul class="unstyled" ng-if="order.status==7">
+													<li>交易已完成</li>
+												</ul>
                                             </td>
                                         </tr>
-                                        
-
                                     </tbody>
                                 </table>
-                                <!--order2-->
+								</div>
+							</div>
+                                <!--&lt;!&ndash;order2&ndash;&gt;
                                 <div class="choose-title">
                                     <label data-toggle="checkbox" class="checkbox-pretty ">
                                            <input type="checkbox" checked="checked"><span>2017-02-11 11:59　订单编号：7867473872181848  店铺：哇哈哈 <a>和我联系</a></span>
@@ -344,7 +422,7 @@ $(function(){
                                     </tbody>
                                 </table>
 
-                                <!--order3-->
+                                &lt;!&ndash;order3&ndash;&gt;
                                 <div class="choose-title">
                                     <label data-toggle="checkbox" class="checkbox-pretty ">
                                            <input type="checkbox" checked="checked"><span>2017-02-11 11:59　订单编号：7867473872181848  店铺：哇哈哈 <a>和我联系</a></span>
@@ -395,11 +473,9 @@ $(function(){
 
                                     </tbody>
                                 </table>
-
-
-
-                            </div>
-                            <div class="choose-order">
+-->
+                            <!--</div>-->
+                            <!--<div class="choose-order">
                                 <div class="sui-pagination pagination-large top-pages">
                                     <ul>
                                         <li class="prev disabled"><a href="#">«上一页</a></li>
@@ -414,7 +490,36 @@ $(function(){
                                             <input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>
                                             页</span></div>
                                 </div>
-                            </div>
+                            </div>-->
+
+							<!--新分页-->
+							<div class="fr page">
+								<div class="sui-pagination pagination-large">
+									<ul>
+										<li class="prev {{isTopPage()?'disabled':''}}">
+											<a href="#" ng-click="queryByPage(pageMap.pageNo-1)">«</a>
+										</li>
+										<li class="dotted" ng-if="firstDot==true"><span>...</span></li>
+
+
+										<li ng-repeat="page in pageLabel">
+											<a href="#" ng-if="page==pageMap.pageNo" ng-click="queryByPage(page)" style="background-color: #1aa5fb"><font color="#f0f8ff">{{page}}</font></a>
+											<a href="#" ng-if="page!=pageMap.pageNo" ng-click="queryByPage(page)">{{page}}</a>
+										</li>
+
+
+										<li class="dotted" ng-if="lastDot==true"><span>...</span></li>
+										<li class="next {{isEndPage()?'disabled':''}}">
+											<a href="#" ng-click="queryByPage(pageMap.pageNo+1)">»</a>
+										</li>
+									</ul>
+									<div><span>共{{resultMap.totalPages}}页&nbsp;</span><span>
+										到第
+						  				<input type="text" class="page-num" ng-model="pageMap.pageNo">
+						  				页
+										<button class="page-confirm" ng-click="queryByPage(pageMap.pageNo)" >确定</button></span></div>
+								</div>
+							</div>
 
                             <div class="clearfix"></div>
                         </div>

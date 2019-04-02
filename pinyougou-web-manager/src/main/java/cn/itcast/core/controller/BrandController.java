@@ -89,9 +89,22 @@ public class BrandController {
         return brandService.findOne(id);
     }
 
+
     //查询所有品牌 并返回List<Map>
     @RequestMapping("/selectOptionList")
     public List<Map> selectOptionList(){
         return brandService.selectOptionList();
+    }
+
+    //开始审核  （审核通过 驳回）
+    @RequestMapping("/updateStatus")
+    public Result updateStatus(Long[] ids ,String status){
+        try {
+            brandService.updateStatus(ids,status);
+            return new Result(true,"成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,"失败");
+        }
     }
 }
