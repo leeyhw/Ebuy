@@ -15,14 +15,14 @@ public class Brand implements Serializable {
      */
     private String firstChar;
 
-    private String aduit_status;
+    private String status;
 
-    public String getAduit_status() {
-        return aduit_status;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAduit_status(String aduit_status) {
-        this.aduit_status = aduit_status;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public static long getSerialVersionUID() {
