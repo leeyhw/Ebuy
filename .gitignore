@@ -17,3 +17,4 @@ generatorConfig.xml
 *.cache
 *.lock
 Test*.java
+D:\pinyougou-parent\pinyougou-dao\src\main\resources\properties\db.properties
