@@ -21,7 +21,7 @@
 
 </head>
 
-<body ng-app="pinyougou" ng-controller="userInfoController" ng-init="showName();setPicPath()">
+<body ng-app="pinyougou" ng-controller="userInfoController" ng-init="showName()">
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
@@ -173,7 +173,7 @@ $(function(){
                 <div class="yui3-u-1-6 list">
 
                     <div class="person-info">
-                        <div class="person-photo"><img src="img/_/photo.png" alt=""></div>
+                        <div class="person-photo"><img src="{{headPhoto==''?'img/_/photo.png':headPhoto}}" alt="" width="55px" height="55px"></div>
                         <div class="person-account">
                             <span class="name">{{loginName}}</span>
                             <span class="safe">账户安全</span>
@@ -279,13 +279,11 @@ $(function(){
                                 </form>
                             </div>
                             <div id="two" class="tab-pane">
-
                                 <div class="new-photo">
                                     <p>当前头像：</p>
                                     <div class="upload">
-                                        <img id="imgShow_WU_FILE_0" width="100" height="100" src="{{infoMap.picPath==''?picPath:infoMap.picPath}}" alt="">
+                                        <img id="imgShow_WU_FILE_0" width="100" height="100" src="{{infoMap.picPath==''?'img/_/photo_icon.png':infoMap.picPath}}" alt="">
                                         <input type="file" id="file"/>
-										<button class="btn btn-primary" type="button" ng-click="uploadFile()">上传</button>
 									</div>
 
                                 </div>

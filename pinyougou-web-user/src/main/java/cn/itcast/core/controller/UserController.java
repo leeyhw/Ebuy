@@ -62,17 +62,17 @@ public class UserController {
         }
     }
 
-    //添加用户信息
-    @RequestMapping("/addUserInfo")
+    //修改用户信息
+    @RequestMapping("/updateUserInfo")
     public Result addUserInfo(@RequestBody Map<String, String> infoMap) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         infoMap.put("name",name);
         try {
             userService.addUserInfo(infoMap);
-            return new Result(true, "操作成功");
+            return new Result(true, "修改已生效");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(false, "操作失败");
+            return new Result(false, "修改失败");
         }
     }
 

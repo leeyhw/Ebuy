@@ -1,7 +1,7 @@
 //服务层
 app.service('userInfoService',function($http){
-	this.addUserInfo=function(infoMap){
-		return $http.post('../user/addUserInfo.do',infoMap);
+	this.updateUserInfo=function(infoMap){
+		return $http.post('../user/updateUserInfo.do',infoMap);
 	};
 
     //上传头像

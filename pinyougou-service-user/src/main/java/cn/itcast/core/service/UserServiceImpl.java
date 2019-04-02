@@ -14,10 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.jms.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @Transactional
-public class UserServiceImpl implements  UserService {
+public class UserServiceImpl implements UserService {
 
 
     //发消息 Map
@@ -52,13 +49,13 @@ public class UserServiceImpl implements  UserService {
 
                 MapMessage map = session.createMapMessage();
                 //手机号
-                map.setString("iphone",phone);//"17801040609"
+                map.setString("iphone", phone);//"17801040609"
                 //验证码
-                map.setString("templateParam","{'number':'"+randomNumeric+"'}");
+                map.setString("templateParam", "{'number':'" + randomNumeric + "'}");
                 //签名
-                map.setString("signName","品优购商城");
+                map.setString("signName", "品优购商城");
                 //模板ID
-                map.setString("templateCode","SMS_126462276");
+                map.setString("templateCode", "SMS_126462276");
 
 
                 return map;
@@ -71,23 +68,23 @@ public class UserServiceImpl implements  UserService {
     public void add(User user, String smscode) {
         String code = (String) redisTemplate.boundValueOps(user.getPhone()).get();
         //判断验证码是否失效
-        if(null == code){
+        if (null == code) {
             throw new RuntimeException("验证码失败");
         }
 
-        if(code.equals(smscode)){
+        if (code.equals(smscode)) {
             //保存用户信息
             user.setCreated(new Date());
             user.setUpdated(new Date());
             //密码加密
             userDao.insertSelective(user);
-        }else{
+        } else {
             throw new RuntimeException("验证码不正确");
         }
     }
 
 
-    //添加用户信息
+    //修改用户信息
     @Override
     public void addUserInfo(Map<String, String> infoMap) {
         User user = new User();
@@ -128,12 +125,37 @@ public class UserServiceImpl implements  UserService {
         if (null != infoMap.get("picPath") && !"".equals(infoMap.get("picPath").trim())) {
             user.setHeadPic(infoMap.get("picPath"));
         }
-        if (users.size()>0){
+        if (users.size() > 0) {
             user.setId(users.get(0).getId());
             userDao.updateByPrimaryKeySelective(user);
-        }else {
+        } else {
             throw new RuntimeException("找不到用户id");
         }
 
+    }
+
+    //根据当前登陆人查询头像和昵称
+    @Override
+    public Map<String, Object> findNickNameAndHeadPhoto(String username) {
+        UserQuery userQuery = new UserQuery();
+        userQuery.createCriteria().andUsernameEqualTo(username);
+        List<User> users = userDao.selectByExample(userQuery);
+        if (users.size() > 0) {
+            Map<String, Object> map = new HashMap<>();
+            User user = users.get(0);
+            //如果没有设置昵称就返回用户账号
+            if (null != user.getNickName()) {
+                map.put("loginName", user.getNickName());
+            } else {
+                map.put("loginName", username);
+            }
+            if (null != user.getHeadPic()) {
+                map.put("headPhoto", user.getHeadPic());
+            } else {
+                map.put("headPhoto", "");
+            }
+            return map;
+        }
+        return null;
     }
 }

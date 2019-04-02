@@ -9,6 +9,9 @@ public interface UserService {
 
     void add(User user, String smscode);
 
-    //添加用户信息
+    //修改用户信息
     void addUserInfo(Map<String, String> infoMap);
+
+    //根据当前登陆人查询头像和昵称
+    Map<String,Object> findNickNameAndHeadPhoto(String username);
 }

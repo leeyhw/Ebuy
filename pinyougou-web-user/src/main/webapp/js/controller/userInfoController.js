@@ -5,6 +5,7 @@ app.controller('userInfoController', function ($scope, userInfoService, loginSer
         loginService.showName().success(
             function (response) {
                 $scope.loginName = response.loginName;
+                $scope.headPhoto = response.headPhoto;
             }
         );
 
@@ -12,12 +13,15 @@ app.controller('userInfoController', function ($scope, userInfoService, loginSer
 
     //定义参数数组
     $scope.infoMap={'nickName':'','gender':'0','birthday':'','address':'','job':'','picPath':''};
+    $scope.headPhoto='';
 
-    $scope.addUserInfo = function () {
-        userInfoService.addUserInfo($scope.infoMap).success(
+    //修改用户信息
+    $scope.updateUserInfo = function () {
+        userInfoService.updateUserInfo($scope.infoMap).success(
             function (response) {
                 if (response.flag){
                     alert(response.message);
+                    window.location.href='home-index.html';
                 }else {
                     alert(response.message);
                 }
@@ -30,7 +34,6 @@ app.controller('userInfoController', function ($scope, userInfoService, loginSer
         $scope.infoMap.address = $("#province1").val()+'/'+$("#city1").val()+'/'+$("#district1").val();
         $scope.infoMap.job = $("#inputJob").val();
         $scope.infoMap.nickName = ($("#inputName").val());
-        $scope.infoMap.picPath = $("#up_img_WU_FILE_0").val();
 
         if ($scope.infoMap.nickName=='' || $scope.infoMap.nickName.trim()==''){
             alert("昵称不能为空");
@@ -41,37 +44,30 @@ app.controller('userInfoController', function ($scope, userInfoService, loginSer
             return;
         }
 
-        $scope.addUserInfo();
+        $scope.updateUserInfo();
 
 
     }
 
-    $scope.setPicPath = function () {
+    /*$scope.setPicPath = function () {
         if ($scope.infoMap.picPath==''){
             $scope.picPath="img/_/photo_icon.png";
         }
-    };
+    };*/
 
-    // //监听器  input框内容变化
-    // $("#file").bind("input",function(){
-    //     alert(111)
-    //     $scope.picPath = $("#file").val();
-    //     alert($scope.picPath)
-    // });
+    //监听器  input框内容变化  如有变化 及时上传 进行img加载显示
+    $("#file").bind("input",function(){
+        $scope.uploadFile();
+    });
 
 
-
-//img/_/photo_icon.png
+    //上传头像 (取消按钮上传 效果快 取消判断空文件)
     $scope.uploadFile = function(){
-        if (!$("#file").val()){
-            alert("请先选择文件")
-            return;
-        }
         // 调用userInfoService的方法完成文件的上传
         userInfoService.uploadFile().success(function(response){
             if(response.flag){
                 // 获得url   <img src="{{infoMap.picPath}}" -->再次发出请求直接获取图片本身
-                $scope.infoMap.picPath =  response.message;//http://...
+                $scope.infoMap.picPath =  response.message;
             }else{
                 alert(response.message);
             }

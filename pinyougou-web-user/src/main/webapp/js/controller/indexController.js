@@ -5,9 +5,12 @@ app.controller('indexController',function($scope,loginService,orderService){
 			loginService.showName().success(
 					function(response){
 						$scope.loginName=response.loginName;
+                        $scope.headPhoto = response.headPhoto;
 					}
 			);
-	}
+	};
+
+    $scope.headPhoto='';
 
     //定义搜索对象的结构
     $scope.pageMap={'pageNo':1,'pageSize':3};
