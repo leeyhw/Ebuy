@@ -21,6 +21,7 @@ import java.util.Map;
 public class TypeTemplateController {
 
     @Reference
+
     private TypeTemplateService typeTemplateService;
 
     //查询分页 有条件

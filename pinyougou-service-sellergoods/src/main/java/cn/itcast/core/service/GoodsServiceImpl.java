@@ -56,10 +56,14 @@ public class GoodsServiceImpl implements GoodsService {
     private SellerDao sellerDao;
     @Autowired
     private BrandDao brandDao;
+    @Autowired
+    private Destination topicPageAndSolrDestination2;
+    @Autowired
+    private Destination queueSolrDeleteDestination2;
 
     //添加三张表
     @Override
-    public void add(GoodsVo vo) {
+    public void add(final GoodsVo vo) {
         //商品表
         //1:页面传递过来的
         //2:程序手动写的  添加时间
@@ -122,8 +126,27 @@ public class GoodsServiceImpl implements GoodsService {
                 itemDao.insertSelective(item);
             }
 
-        } else {
+        }else {
             //不启用 （不写）
+        }
+        //商品上下架的管理
+        if(vo.getGoods().getIsMarketable().equals("1"))
+        {
+            jmsTemplate.send(topicPageAndSolrDestination2, new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    return  session.createTextMessage(String.valueOf(vo.getGoods().getId()));
+                }
+            });
+        }
+//       (下架)
+                else if(vo.getGoods().getIsMarketable().equals("0")){
+            jmsTemplate.send(queueSolrDeleteDestination2, new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    return  session.createTextMessage(String.valueOf(vo.getGoods().getId()));
+                }
+            });
         }
 
     }
@@ -175,7 +198,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     //修改
     @Override
-    public void update(GoodsVo vo) {
+    public void update(final GoodsVo vo) {
         //商品表
         goodsDao.updateByPrimaryKeySelective(vo.getGoods());
         //商品详情表
@@ -234,8 +257,27 @@ public class GoodsServiceImpl implements GoodsService {
                 itemDao.insertSelective(item);
             }
 
-        } else {
+        }
+        else {
             //不启用 （不写）
+        }
+        if(vo.getGoods().getIsMarketable().equals("1"))
+        {
+            jmsTemplate.send(topicPageAndSolrDestination2, new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    return  session.createTextMessage(String.valueOf(vo.getGoods().getId()));
+                }
+            });
+        }
+//       (下架)
+        else if(vo.getGoods().getIsMarketable().equals("0")){
+            jmsTemplate.send(queueSolrDeleteDestination2, new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    return  session.createTextMessage(String.valueOf(vo.getGoods().getId()));
+                }
+            });
         }
 
     }

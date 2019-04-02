@@ -28,6 +28,7 @@ public class GoodsController {
             //1:当前登陆人
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             vo.getGoods().setSellerId(name);
+            vo.getGoods().setIsMarketable("0");
             goodsService.add(vo);
             return new Result(true,"成功");
         } catch (Exception e) {
@@ -38,6 +39,7 @@ public class GoodsController {
     //商品修改
     @RequestMapping("/update")
     public Result update(@RequestBody GoodsVo vo){
+
         try {
 
             goodsService.update(vo);

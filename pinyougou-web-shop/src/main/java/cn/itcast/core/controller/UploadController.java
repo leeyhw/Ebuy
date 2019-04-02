@@ -14,7 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @RestController
 @RequestMapping("/upload")
-public class UploadController {
+public class
+UploadController {
 
 
     @Value("${FILE_SERVER_URL}")

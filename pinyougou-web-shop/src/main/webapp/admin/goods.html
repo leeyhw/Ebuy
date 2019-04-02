@@ -83,8 +83,10 @@
 									      <th class="sorting">一级分类</th>
 									      <th class="sorting">二级分类</th>
 									      <th class="sorting">三级分类</th>
-									      <th class="sorting">状态</th>									     						
+									      <th class="sorting">状态</th>
+                                          <th class="text-center">上下架</th>
 					                      <th class="text-center">操作</th>
+
 			                          </tr>
 			                      </thead>
 			                      <tbody>
@@ -100,11 +102,16 @@
 		                                  	<span>
 		                                  		{{status[entity.auditStatus]}}
 		                                  	</span>
-		                                  </td>		                                  
-		                                  <td class="text-center">
+		                                  </td>
+                                          <td>
+		                                  	<span >
+		                                  		{{status2[entity.isMarketable]}}
+		                                  	</span>
+                                          </td>
+                                          <td class="text-center">
 		                                  	  <a class="btn bg-olive btn-xs" href="goods_edit.html#?id={{entity.id}}">修改</a>                                
 		                                  </td>
-			                          </tr>
+                                      </tr>
 			                      </tbody>
 			                  </table>
 			                  <!--数据列表/-->                        
