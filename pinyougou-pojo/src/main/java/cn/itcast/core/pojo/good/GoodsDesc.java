@@ -23,7 +23,6 @@ public class GoodsDesc implements Serializable {
      */
     private String customAttributeItems;
 
-    //图片的  [{color:..,url:...},{},{}]
     private String itemImages;
 
     /**

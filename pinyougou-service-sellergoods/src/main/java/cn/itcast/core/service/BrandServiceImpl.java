@@ -47,10 +47,12 @@ public class BrandServiceImpl implements BrandService {
     //保存
     @Override
     public void add(Brand brand) {
+        brand.setStatus("0");
         brandDao.insertSelective(brand);
         //insert into tb_tt (id,name,98个) values (3,haha,null 98个)  执行的效果是一样的 但是执行的效率是一样的
         //insert into tb_tt (id,name) values (3,haha)
         //update tb_tt set id = #{id},name= ......   where id
+
     }
 
     @Override
@@ -100,6 +102,10 @@ public class BrandServiceImpl implements BrandService {
         if(null != brand.getFirstChar() && !"".equals(brand.getFirstChar().trim())){
             criteria.andFirstCharEqualTo(brand.getFirstChar().trim());
         }
+        //只显示未审核状态的
+        if(null != brand.getStatus() && !"".equals(brand.getStatus().trim())){
+            criteria.andStatusEqualTo(brand.getStatus());
+        }
 
         //查询结果集
         Page<Brand> page = (Page<Brand>) brandDao.selectByExample(brandQuery);
@@ -112,6 +118,22 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<Map> selectOptionList() {
         return brandDao.selectOptionList();
+    }
+
+    //审核
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+
+        Brand brand=new Brand();
+        brand.setStatus(status);
+        if(null!=ids && ids.length>0){
+
+            for (Long id : ids) {
+                brand.setId(id);
+                brandDao.updateByPrimaryKeySelective(brand);
+            }
+        }
+
     }
 
 }

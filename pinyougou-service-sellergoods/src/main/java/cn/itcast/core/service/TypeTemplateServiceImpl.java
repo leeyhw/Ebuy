@@ -55,6 +55,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
     //添加
     @Override
     public void add(TypeTemplate typeTemplate) {
+        typeTemplate.setStatus("0");
          typeTemplateDao.insertSelective(typeTemplate);
     }
 
@@ -92,5 +93,16 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
         }
 
         return listMap;
+    }
+
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+        TypeTemplate typeTemplate=new TypeTemplate();
+        typeTemplate.setStatus(status);
+        for (Long id : ids) {
+
+            typeTemplate.setId(id);
+            typeTemplateDao.updateByPrimaryKeySelective(typeTemplate);
+        }
     }
 }
