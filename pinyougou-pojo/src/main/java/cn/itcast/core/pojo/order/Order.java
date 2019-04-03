@@ -134,6 +134,17 @@ public class Order implements Serializable {
     //添加了商家名称
     private String sellerName;
 
+    //订单id 字符串格式
+    private String orderIdStr;
+
+    public String getOrderIdStr() {
+        return orderIdStr;
+    }
+
+    public void setOrderIdStr(String orderIdStr) {
+        this.orderIdStr = orderIdStr;
+    }
+
     //订单明细集合
     private List<OrderItem> orderItemList;
 

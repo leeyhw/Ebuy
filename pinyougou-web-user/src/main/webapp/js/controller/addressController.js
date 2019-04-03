@@ -88,7 +88,7 @@ app.controller('addressController', function ($scope, $controller, addressServic
     //删除一条地址
     $scope.delOneAddress = function (id,isDefault) {
         if (isDefault == '1'){
-            alert("该地址为默认地址,请先修改默认地址");
+            alert("该地址为默认地址，请先修改默认地址");
             return;
         }
         if (confirm("您确定要删除该地址吗?")){
