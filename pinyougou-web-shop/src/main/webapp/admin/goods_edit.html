@@ -100,9 +100,11 @@
 		                           </div>
 		                           
 		                           <div class="col-md-2 title">品牌</div>
-		                           <div class="col-md-10 data">
-		                              <select class="form-control" ng-model="entity.goods.brandId" ng-options="item.id as item.text for item in typeTemplate.brandIds" ></select>
-		                           </div>
+									<div class="col-md-10 data">
+										<select class="form-control" ng-model="entity.goods.brandId" ng-options="item.id as item.text for item in typeTemplate.brandIds" ></select>
+									</div>
+
+
 		
 								   <div class="col-md-2 title">副标题</div>
 		                           <div class="col-md-10 data">
@@ -190,6 +192,11 @@
 			                        	<input type="checkbox" ng-model="entity.goods.isEnableSpec" ng-true-value="1" ng-false-value="0">			                           
 			                        </div>
                             	</div>
+								<div class="row data-type">
+								<div class="col-md-2 title">上架</div>
+								<div class="col-md-10 data">
+									<input type="checkbox" ng-model="entity.goods.isMarketable" ng-true-value="1" ng-false-value="0">
+								</div>
                             	<p>
                             	
                             	<div ng-if="entity.goods.isEnableSpec == 1">

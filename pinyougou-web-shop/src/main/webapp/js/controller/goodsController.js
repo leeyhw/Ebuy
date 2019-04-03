@@ -255,7 +255,8 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 
 	// 显示状态
 	$scope.status = ["未审核","审核通过","审核未通过","关闭"];
-	
+
+    $scope.status2 = ["下架","上架"];
 	///$scope.itemCatList = [null,图书、音像、电子书刊,电子书刊,.......   戒指];//1000+
 	      //                 0          1             2  ....         1004
     $scope.itemCatList = [];

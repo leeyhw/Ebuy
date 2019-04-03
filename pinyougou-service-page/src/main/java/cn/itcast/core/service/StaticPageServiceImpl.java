@@ -28,7 +28,7 @@ import java.util.Map;
  * 静态化处理实现类
  */
 @Service
-public class StaticPageServiceImpl implements StaticPageService,ServletContextAware {
+public class  StaticPageServiceImpl implements StaticPageService,ServletContextAware {
 
 
     @Autowired

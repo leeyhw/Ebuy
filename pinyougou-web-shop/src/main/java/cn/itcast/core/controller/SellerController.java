@@ -18,6 +18,7 @@ public class SellerController {
 
     @Reference
     private SellerService sellerService;
+
     //添加
     @RequestMapping("/add")
     public Result add(@RequestBody Seller seller){

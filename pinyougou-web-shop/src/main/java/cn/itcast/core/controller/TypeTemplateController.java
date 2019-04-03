@@ -21,6 +21,7 @@ import java.util.Map;
 public class TypeTemplateController {
 
     @Reference
+
     private TypeTemplateService typeTemplateService;
 
     //查询分页 有条件
@@ -32,6 +33,7 @@ public class TypeTemplateController {
     @RequestMapping("/add")
     public Result add(@RequestBody TypeTemplate typeTemplate){
         try {
+            typeTemplate.setStatus("0");
             typeTemplateService.add(typeTemplate);
              return new Result(true,"成功");
         } catch (Exception e) {

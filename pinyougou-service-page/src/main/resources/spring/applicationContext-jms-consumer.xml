@@ -30,5 +30,17 @@
 	</bean>
 	<!-- 自定义 消息 处理类 -->
 	<bean id="pageListener" class="cn.itcast.core.listener.PageListener"></bean>
+
+	<bean id="topicPageAndSolrDestination2" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="pinyougou_topic_page_solr"/>
+	</bean>
+
+	<!-- 发布订阅模式, 消息监听容器   生成页面 -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="topicPageAndSolrDestination2" />
+		<property name="messageListener" ref="pageListener" />
+	</bean>
+
 	
 </beans>
