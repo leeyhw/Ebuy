@@ -32,6 +32,7 @@ public class TypeTemplateController {
     @RequestMapping("/add")
     public Result add(@RequestBody TypeTemplate typeTemplate){
         try {
+            typeTemplate.setStatus("0");
             typeTemplateService.add(typeTemplate);
              return new Result(true,"成功");
         } catch (Exception e) {

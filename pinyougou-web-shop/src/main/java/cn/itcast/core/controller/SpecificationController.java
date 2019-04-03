@@ -26,7 +26,7 @@ public class SpecificationController {
 
     //条件对象的查询分页结果集
     @RequestMapping("/search")
-    public PageResult search(Integer page, Integer rows, @RequestBody Specification specification){
+    public PageResult search(Integer page, Integer rows, @RequestBody Specification specification ){
         return specificationService.search(page,rows,specification);
     }
     //保存
