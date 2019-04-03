@@ -1,4 +1,4 @@
-app.controller('payController' ,function($scope ,$location,payService){
+﻿app.controller('payController' ,function($scope ,$location,payService){
 	
 
 	//生成二维码
@@ -43,8 +43,10 @@ app.controller('payController' ,function($scope ,$location,payService){
 					location.href="paysuccess.html#?money="+$scope.money;
 				}else{
 					if(response.message=='二维码超时'){
-						$scope.createNative();//重新生成二维码
+						//$scope.createNative();//重新生成二维码
+						$scope.closeorder();//关闭支付
 					}else{
+						$scope.closeorder();//关闭支付
 						location.href="payfail.html";
 					}
 				}				
