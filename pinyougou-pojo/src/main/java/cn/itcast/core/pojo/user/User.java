@@ -108,6 +108,32 @@ public class User implements Serializable {
      */
     private Date lastLoginTime;
 
+    /**
+     * 用户所在地
+     */
+    private String address;
+
+    /**
+     * 职业
+     */
+    private String occupation;
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -314,6 +340,8 @@ public class User implements Serializable {
         sb.append(", experienceValue=").append(experienceValue);
         sb.append(", birthday=").append(birthday);
         sb.append(", lastLoginTime=").append(lastLoginTime);
+        sb.append(", address=").append(address);
+        sb.append(", occupation=").append(occupation);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -352,6 +380,8 @@ public class User implements Serializable {
             && (this.getPoints() == null ? other.getPoints() == null : this.getPoints().equals(other.getPoints()))
             && (this.getExperienceValue() == null ? other.getExperienceValue() == null : this.getExperienceValue().equals(other.getExperienceValue()))
             && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()))
+            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+            && (this.getOccupation() == null ? other.getOccupation() == null : this.getOccupation().equals(other.getOccupation()))
             && (this.getLastLoginTime() == null ? other.getLastLoginTime() == null : this.getLastLoginTime().equals(other.getLastLoginTime()));
     }
 
@@ -381,6 +411,8 @@ public class User implements Serializable {
         result = prime * result + ((getExperienceValue() == null) ? 0 : getExperienceValue().hashCode());
         result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
         result = prime * result + ((getLastLoginTime() == null) ? 0 : getLastLoginTime().hashCode());
+        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
+        result = prime * result + ((getOccupation() == null) ? 0 : getOccupation().hashCode());
         return result;
     }
 }

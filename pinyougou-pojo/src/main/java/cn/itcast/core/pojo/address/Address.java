@@ -61,6 +61,17 @@ public class Address implements Serializable {
      */
     private String alias;
 
+    // 地址详情
+    private String detailAddr;
+
+    public String getDetailAddr() {
+        return detailAddr;
+    }
+
+    public void setDetailAddr(String detailAddr) {
+        this.detailAddr = detailAddr;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -195,17 +206,17 @@ public class Address implements Serializable {
         }
         Address other = (Address) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getProvinceId() == null ? other.getProvinceId() == null : this.getProvinceId().equals(other.getProvinceId()))
-            && (this.getCityId() == null ? other.getCityId() == null : this.getCityId().equals(other.getCityId()))
-            && (this.getTownId() == null ? other.getTownId() == null : this.getTownId().equals(other.getTownId()))
-            && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
-            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getContact() == null ? other.getContact() == null : this.getContact().equals(other.getContact()))
-            && (this.getIsDefault() == null ? other.getIsDefault() == null : this.getIsDefault().equals(other.getIsDefault()))
-            && (this.getNotes() == null ? other.getNotes() == null : this.getNotes().equals(other.getNotes()))
-            && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
-            && (this.getAlias() == null ? other.getAlias() == null : this.getAlias().equals(other.getAlias()));
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getProvinceId() == null ? other.getProvinceId() == null : this.getProvinceId().equals(other.getProvinceId()))
+                && (this.getCityId() == null ? other.getCityId() == null : this.getCityId().equals(other.getCityId()))
+                && (this.getTownId() == null ? other.getTownId() == null : this.getTownId().equals(other.getTownId()))
+                && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
+                && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+                && (this.getContact() == null ? other.getContact() == null : this.getContact().equals(other.getContact()))
+                && (this.getIsDefault() == null ? other.getIsDefault() == null : this.getIsDefault().equals(other.getIsDefault()))
+                && (this.getNotes() == null ? other.getNotes() == null : this.getNotes().equals(other.getNotes()))
+                && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
+                && (this.getAlias() == null ? other.getAlias() == null : this.getAlias().equals(other.getAlias()));
     }
 
     @Override

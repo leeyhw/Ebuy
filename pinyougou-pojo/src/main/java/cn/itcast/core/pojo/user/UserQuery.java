@@ -1505,65 +1505,136 @@ public class UserQuery {
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeIsNull() {
-            addCriterion("last_login_time is null");
+        public Criteria andAddressIsNull() {
+            addCriterion("address is null");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeIsNotNull() {
-            addCriterion("last_login_time is not null");
+        public Criteria andAddressIsNotNull() {
+            addCriterion("address is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeEqualTo(Date value) {
-            addCriterion("last_login_time =", value, "lastLoginTime");
+        public Criteria andAddressEqualTo(String value) {
+            addCriterion("address =", value, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeNotEqualTo(Date value) {
-            addCriterion("last_login_time <>", value, "lastLoginTime");
+        public Criteria andAddressNotEqualTo(String value) {
+            addCriterion("address <>", value, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeGreaterThan(Date value) {
-            addCriterion("last_login_time >", value, "lastLoginTime");
+        public Criteria andAddressGreaterThan(String value) {
+            addCriterion("address >", value, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("last_login_time >=", value, "lastLoginTime");
+        public Criteria andAddressGreaterThanOrEqualTo(String value) {
+            addCriterion("address >=", value, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeLessThan(Date value) {
-            addCriterion("last_login_time <", value, "lastLoginTime");
+        public Criteria andAddressLessThan(String value) {
+            addCriterion("address <", value, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeLessThanOrEqualTo(Date value) {
-            addCriterion("last_login_time <=", value, "lastLoginTime");
+        public Criteria andAddressLessThanOrEqualTo(String value) {
+            addCriterion("address <=", value, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeIn(List<Date> values) {
-            addCriterion("last_login_time in", values, "lastLoginTime");
+        public Criteria andAddressIn(List<String> values) {
+            addCriterion("address in", values, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeNotIn(List<Date> values) {
-            addCriterion("last_login_time not in", values, "lastLoginTime");
+        public Criteria andAddressNotIn(List<String> values) {
+            addCriterion("address not in", values, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeBetween(Date value1, Date value2) {
-            addCriterion("last_login_time between", value1, value2, "lastLoginTime");
+        public Criteria andAddressBetween(String value1, String value2) {
+            addCriterion("address between", value1, value2, "address");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeNotBetween(Date value1, Date value2) {
-            addCriterion("last_login_time not between", value1, value2, "lastLoginTime");
+        public Criteria andAddressNotBetween(String value1, String value2) {
+            addCriterion("address not between", value1, value2, "address");
             return (Criteria) this;
         }
+
+        public Criteria andOccupationIsNull() {
+            addCriterion("occupation is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationIsNotNull() {
+            addCriterion("occupation is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationEqualTo(String value) {
+            addCriterion("occupation =", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationNotEqualTo(String value) {
+            addCriterion("occupation <>", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationGreaterThan(String value) {
+            addCriterion("occupation >", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationGreaterThanOrEqualTo(String value) {
+            addCriterion("occupation >=", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationLessThan(String value) {
+            addCriterion("occupation <", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationLessThanOrEqualTo(String value) {
+            addCriterion("occupation <=", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationLike(String value) {
+            addCriterion("occupation like", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationNotLike(String value) {
+            addCriterion("occupation not like", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationIn(List<String> values) {
+            addCriterion("occupation in", values, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationNotIn(List<String> values) {
+            addCriterion("occupation not in", values, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationBetween(String value1, String value2) {
+            addCriterion("occupation between", value1, value2, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationNotBetween(String value1, String value2) {
+            addCriterion("occupation not between", value1, value2, "occupation");
+            return (Criteria) this;
+        }
+
     }
 
     public static class Criteria extends GeneratedCriteria {
