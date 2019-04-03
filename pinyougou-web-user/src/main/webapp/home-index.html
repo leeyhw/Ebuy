@@ -13,6 +13,7 @@
     
     <script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
 	<script type="text/javascript" src="js/base.js"></script>
+	<script type="text/javascript" src="js/controller/baseController.js"></script>
 	<script type="text/javascript" src="js/controller/indexController.js"></script>
 	<script type="text/javascript" src="js/service/loginService.js"></script>
 	<script type="text/javascript" src="js/service/orderService.js"></script>
@@ -157,7 +158,7 @@ $(function(){
                 <div class="yui3-u-1-6 list">
 
                     <div class="person-info">
-                        <div class="person-photo"><img src="img/_/photo.png" alt=""></div>
+                        <div class="person-photo"><img src="{{headPhoto==''?'img/_/photo.png':headPhoto}}" height="55px" width="55px" alt=""></div>
                         <div class="person-account">
                             <span class="name">{{loginName}}</span>
                             <span class="safe"><a href="logout/cas">退出登录 </a></span>
