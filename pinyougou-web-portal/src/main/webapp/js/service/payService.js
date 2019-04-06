@@ -1,4 +1,4 @@
-app.service('payService',function($http){
+﻿app.service('payService',function($http){
 	//本地支付
 
 	this.createNative=function(){
@@ -8,5 +8,9 @@ app.service('payService',function($http){
 	//查询支付状态
 	this.queryPayStatus=function(out_trade_no){
 		return $http.get('pay/queryPayStatus.do?out_trade_no='+out_trade_no);
+	}
+	//关闭支付
+	this.closeorder=function(out_trade_no){
+		return $http.get('pay/closeorder.do?out_trade_no='+out_trade_no)
 	}
 });

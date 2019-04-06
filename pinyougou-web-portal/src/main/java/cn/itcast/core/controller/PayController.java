@@ -35,26 +35,44 @@ public class PayController {
         try {
             int x = 0;
             //无限循环
-            while (true){
-                Map<String,String> map = payService.queryPayStatus(out_trade_no);
-                if("NOTPAY".equals(map.get("trade_state"))){
+            while (true) {
+                Map<String, String> map = payService.queryPayStatus(out_trade_no);
+                if ("PAYERROR".equals(map.get("trade_state"))) {
+
+                    Map<String, String> closeordermap = payService.closeorder(out_trade_no);
+                    return new Result(false, "支付失败");
+                }
+                if ("CLOSED".equals(map.get("trade_state"))) {
+
+                    Map<String, String> closeordermap = payService.closeorder(out_trade_no);
+                    return new Result(false, "支付失败");
+                }
+                if ("REVOKED".equals(map.get("trade_state"))) {
+
+                    Map<String, String> closeordermap = payService.closeorder(out_trade_no);
+                    return new Result(false, "支付失败");
+                }
+
+                if ("NOTPAY".equals(map.get("trade_state"))) {
                     //休息一会
                     Thread.sleep(5000);
                     x++;
-                    if(x >= 60){
-                        return new Result(false,"支付超时");
+                    if (x >= 60) {
+                        Map<String, String> closeordermap = payService.closeorder(out_trade_no);
+                        return new Result(false, "支付超时");
                     }
-                }else{
+                } else {
                     //收尾：改状态
                     //map : 支付成功之后流水号
                     //支付成功的时间
 
-                    return new Result(true,"支付成功");
+                    return new Result(true, "支付成功");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(false,"支付失败");
+            Map<String, String> closeordermap = payService.closeorder(out_trade_no);
+            return new Result(false, "支付失败");
         }
     }
 }
